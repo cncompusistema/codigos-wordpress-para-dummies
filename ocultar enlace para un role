@@ -1,0 +1,10 @@
+//Estto hara que el usuario actual con rol suscriptor pueda ver el enlace en su propio post y el de los admin 
+//pero no vera el de los otros suscriptores
+
+if ( current_user_can('administrator') || current_user_can('editor')){
+            echo $this->uploads->show_uploaded_files($post->id, $post->uploads);
+        }elseif ($current_user->ID ==$post->author_id || user_can($post->author_id,'editor') || user_can($post->author_id,'administrator')){
+            echo $this->uploads->show_uploaded_files($post->id, $post->uploads);
+        }else{
+            echo 'ALGO AQUI';
+        }
